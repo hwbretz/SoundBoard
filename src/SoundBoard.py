@@ -38,23 +38,23 @@ def main():
 
     btn_dict = {0:tracks[0],1:tracks[1],2:tracks[2],3:tracks[3],4:tracks[4],5:tracks[5],6:tracks[6],7:tracks[7],8:tracks[8]}
     
-    button_0 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[0],bottom_lbl))
+    button_0 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[0].get_audio_path(),bottom_lbl))
     button_0.grid(column=0,row=1,sticky=NW)
-    button_1 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[1],bottom_lbl))
+    button_1 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[1].get_audio_path(),bottom_lbl))
     button_1.grid(column=1,row=1,sticky=N)
-    button_2 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[2],bottom_lbl))
+    button_2 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[2].get_audio_path(),bottom_lbl))
     button_2.grid(column=2,row=1,sticky=NE)
-    button_3 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[3],bottom_lbl))
+    button_3 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[3].get_audio_path(),bottom_lbl))
     button_3.grid(column=0,row=2,sticky=W)
-    button_4 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[4],bottom_lbl))
+    button_4 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[4].get_audio_path(),bottom_lbl))
     button_4.grid(column=1,row=2)
-    button_5 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[5],bottom_lbl))
+    button_5 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[5].get_audio_path(),bottom_lbl))
     button_5.grid(column=2,row=2,sticky=E)
-    button_6 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[6],bottom_lbl))
+    button_6 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[6].get_audio_path(),bottom_lbl))
     button_6.grid(column=0,row=3,sticky=W)
-    button_7 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[7],bottom_lbl))
+    button_7 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[7].get_audio_path(),bottom_lbl))
     button_7.grid(column=1,row=3)
-    button_8 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[8],bottom_lbl))
+    button_8 = Button(root,image=spkr_img,command=lambda:functions.play_sound(btn_dict[8].get_audio_path(),bottom_lbl))
     button_8.grid(column=2,row=3,sticky=E)
     
 
