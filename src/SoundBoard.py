@@ -31,7 +31,7 @@ def main():
     #row_1 = Frame(root)
     #row_1.pack(fill = BOTH,expand=True)
 
-    #get audio tracks
+    #get audio tracks for buttons
     tracks = functions.build_audio_list()
     #for track in tracks:
                #print(track)
@@ -62,15 +62,18 @@ def main():
     bottom_lbl = Label(root,text="waiting to play...")
     bottom_lbl.grid(row=4,column=1)
 
+    #to hold all the audio tracks available
+    library = functions.build_audio_list("audio_library.txt")
     
-
-    test_btn = Button(root,text="modify board",command=lambda:modify_board(root,tracks,btn_dict))
+    test_btn = Button(root,text="modify board",command=lambda:modify_board(root,library,btn_dict))
     test_btn.grid(row=4,column=2)
     #start up gui
     root.mainloop()
 
+
+
 #2nd window to modify sound board    
-def modify_board(root,tracks,btn_dict):
+def modify_board(root,library,btn_dict):
     modify_window = Toplevel(root)
     modify_window.title("Modify Sound Board")
     modify_window.geometry("400x300")
@@ -86,7 +89,10 @@ def modify_board(root,tracks,btn_dict):
     sfx_box = Listbox(modify_window, bg="white",activestyle="dotbox",fg="black",selectmode=SINGLE, exportselection=0) #height=200,width=150,
     sfx_box.grid(row=0,column=1)
     #fill right listbox with audio options
-    functions.populate_listbox_txt(sfx_box,"audio_library.txt")
+    functions.populate_listbox_obj_arr(sfx_box, library)
+    #deprecated
+    #functions.populate_listbox_txt(sfx_box,"audio_library.txt")
+
     #listbox for buttons
     btn_box = Listbox(modify_window, bg="white",activestyle="dotbox",fg="black",selectmode=SINGLE,exportselection=0)
     btn_box.grid(row=0,column=0)
@@ -100,7 +106,7 @@ def modify_board(root,tracks,btn_dict):
     btn_box.insert(7,"Bottom Mid")
     btn_box.insert(8,"Bottom Right")
 
-    modify = Button(modify_window,text="Assign selected audio to selected button",command=lambda:functions.modify_button(btn_box.curselection(),sfx_box.get(sfx_box.curselection()),btn_dict))
+    modify = Button(modify_window,text="Assign selected audio to selected button",command=lambda:functions.modify_button(btn_box.curselection(),sfx_box.get(sfx_box.curselection()),btn_dict,library))
                     #tracks,btn_box.get(btn_box.curselection()),sfx_box.get(0,END),sfx_box.get(sfx_box.curselection())
     modify.grid(row=1,column=0)
     modify_window.protocol("WM_DELETE_WINDOW",lambda: close_window(modify_window))
@@ -114,9 +120,10 @@ if __name__ == "__main__":
     main()
 
 
-# make window to change soundboard
+
+#update btn dict to use track object get image path
+
 ##open file path
-##assign to button
 ####build a play function into 2nd window
 ##build array of tracks
 ##make sure not array of old tracks

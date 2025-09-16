@@ -8,6 +8,8 @@ class track_object():
             img_path = './img/speaker.png'
         self.img_path = os.path.abspath(img_path)
     def __str__(self):
-        return Path(self.track_path).stem
+        return Path(self.track_path).stem + ".mp3"
     def get_audio_path(self):
         return self.track_path
+    def get_image_path(self):
+        return self.img_path
