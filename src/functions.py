@@ -40,7 +40,7 @@ def populate_listbox_obj_arr(listbox,arr):
        for idx in range(0,len(arr)):
               listbox.insert(idx,arr[idx])
 
-# reasign button through updating button dictionary
+# reasign button through by button dictionary
 def modify_button(btn_idx,sfx,btn_dict, library):
        # look for track in audio library
        found = False
