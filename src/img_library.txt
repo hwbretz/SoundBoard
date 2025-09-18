@@ -1,0 +1,10 @@
+img/boing.png
+img/burp.png
+img/carhorn.png
+img/computer.png
+img/cricket.png
+img/evillaugh.png
+img/laughtrack.png
+img/speaker.png
+img/trombone.png
+img/squeak.png

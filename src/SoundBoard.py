@@ -1,5 +1,4 @@
 from tkinter import *
-from PIL import Image, ImageTk
 import functions
 
 
@@ -19,22 +18,10 @@ def main():
 
     top_lbl=Label(root,text="Click a button!")
     top_lbl.grid(column=1,row=0,padx=3,pady=1)
-    #startup audio service
-    #mixer.init()
-
-    #basic icon
-    spkr_icon = Image.open('./img/speaker.png')
-    spkr_icon = spkr_icon.resize((125,125))
-    spkr_img = ImageTk.PhotoImage(spkr_icon)
-
-    #buttons and auto placement with .pack()
-    #row_1 = Frame(root)
-    #row_1.pack(fill = BOTH,expand=True)
 
     #get audio tracks for buttons
     tracks = functions.build_audio_list()
-    #for track in tracks:
-               #print(track)
+    
 
     btn_dict = {0:tracks[0],1:tracks[1],2:tracks[2],3:tracks[3],4:tracks[4],5:tracks[5],6:tracks[6],7:tracks[7],8:tracks[8]}
     
@@ -63,9 +50,9 @@ def main():
     bottom_lbl.grid(row=4,column=1)
 
     #to hold all the audio tracks available
-    library = functions.build_audio_list("audio_library.txt")
+    #library = functions.build_audio_list("audio_library.txt")
     
-    test_btn = Button(root,text="modify board",command=lambda:modify_board(root,library,btn_dict))
+    test_btn = Button(root,text="modify board",command=lambda:modify_board(root,"audio_library.txt",btn_dict))
     test_btn.grid(row=4,column=2)
     #start up gui
     root.mainloop()
@@ -76,22 +63,15 @@ def main():
 def modify_board(root,library,btn_dict):
     modify_window = Toplevel(root)
     modify_window.title("Modify Sound Board")
-    modify_window.geometry("400x300")
+    modify_window.geometry("460x300")
     modify_window.columnconfigure(0,weight=1)
     modify_window.columnconfigure(1,weight=1)
+    modify_window.columnconfigure(2,weight=1)
     modify_window.rowconfigure(0,weight=5)
     modify_window.rowconfigure(1,weight=1)
     #make window modal; cant interact with main window till this one is closed
     modify_window.grab_set()
     lbl=Label(modify_window,text="main window inactive till this window closed.")
-    #lbl.pack()
-    #listbox for audio library
-    sfx_box = Listbox(modify_window, bg="white",activestyle="dotbox",fg="black",selectmode=SINGLE, exportselection=0) #height=200,width=150,
-    sfx_box.grid(row=0,column=1)
-    #fill right listbox with audio options
-    functions.populate_listbox_obj_arr(sfx_box, library)
-    #deprecated
-    #functions.populate_listbox_txt(sfx_box,"audio_library.txt")
 
     #listbox for buttons
     btn_box = Listbox(modify_window, bg="white",activestyle="dotbox",fg="black",selectmode=SINGLE,exportselection=0)
@@ -105,6 +85,17 @@ def modify_board(root,library,btn_dict):
     btn_box.insert(6,"Bottom Left")
     btn_box.insert(7,"Bottom Mid")
     btn_box.insert(8,"Bottom Right")
+
+    #listbox for audio library
+    sfx_box = Listbox(modify_window, bg="white",activestyle="dotbox",fg="black",selectmode=SINGLE, exportselection=0)
+    sfx_box.grid(row=0,column=1)
+    #fill right listbox with audio options
+    functions.populate_listbox_txt(sfx_box, library)
+
+    #listbox for image library
+    img_box = Listbox(modify_window, bg="white",activestyle="dotbox",fg="black",selectmode=SINGLE, exportselection=0)
+    img_box.grid(row=0,column=2)
+    functions.populate_listbox_txt(img_box,"img_library.txt")
 
     modify = Button(modify_window,text="Assign selected audio to selected button",command=lambda:functions.modify_button(btn_box.curselection(),sfx_box.get(sfx_box.curselection()),btn_dict,library))
                     #tracks,btn_box.get(btn_box.curselection()),sfx_box.get(0,END),sfx_box.get(sfx_box.curselection())
@@ -120,8 +111,6 @@ if __name__ == "__main__":
     main()
 
 
-
-#update btn dict to use track object get image path
 
 ##open file path
 ####build a play function into 2nd window
