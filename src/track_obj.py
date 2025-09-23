@@ -10,6 +10,7 @@ class track_object():
             img_path = './img/speaker.png'
         self.img_path = os.path.abspath(img_path)
         self.icon = self.make_img_icon(self.img_path)
+        
     def make_img_icon(self,img_path):
         spkr_icon = Image.open(img_path)
         spkr_icon = spkr_icon.resize((125,125))

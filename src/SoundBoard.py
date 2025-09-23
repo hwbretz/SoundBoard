@@ -22,8 +22,10 @@ def main():
     #get audio tracks for buttons
     tracks = functions.build_audio_list()
     
-
+    #dictionary to hold tracks assigned to buttons
     btn_dict = {0:tracks[0],1:tracks[1],2:tracks[2],3:tracks[3],4:tracks[4],5:tracks[5],6:tracks[6],7:tracks[7],8:tracks[8]}
+
+    #sound effect buttons
     btn_arr = [
         Button(root,image=btn_dict[0].get_image(),command=lambda:functions.play_sound(btn_dict[0].get_audio_path(),bottom_lbl)),
         Button(root,image=btn_dict[1].get_image(),command=lambda:functions.play_sound(btn_dict[1].get_audio_path(),bottom_lbl)),
@@ -44,6 +46,17 @@ def main():
     btn_arr[6].grid(column=0,row=3,sticky=W)
     btn_arr[7].grid(column=1,row=3)
     btn_arr[8].grid(column=2,row=3,sticky=E)
+
+    #menu bar
+    menubar = Menu(root)
+    #menu heading
+    menu = Menu(menubar,tearoff=0)
+    #subheadings
+    menu.add_command(label="Add to audio library",command=lambda:functions.add_to_library("audio"))
+    menu.add_command(label="Add to image library",command=lambda:functions.add_to_library("img"))
+    menu.add_command(label="Save configuration",command=lambda:functions.save_configuration(btn_dict))
+    menubar.add_cascade(label="File",menu=menu)
+    root.config(menu = menubar)
 
     #bottom label
     bottom_lbl = Label(root,text="waiting to play...")
@@ -101,14 +114,15 @@ def modify_board(root,library,btn_dict,btn_arr):
     modify = Button(modify_window,text="Update selected button",command=lambda:functions.modify_button(btn_box.curselection(),btn_dict,library,"img_library.txt",sfx_box,img_box,btn_arr))
     modify.grid(row=1,column=0)
 
-    
-
     modify_window.protocol("WM_DELETE_WINDOW",lambda: close_window(modify_window))
 
 # close child window
 def close_window(window):
     window.grab_release()
     window.destroy()
+
+
+
 
 if __name__ == "__main__":
     main()

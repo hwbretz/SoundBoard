@@ -2,11 +2,13 @@ from pygame import mixer
 from pathlib import Path
 import os
 from track_obj import track_object
+from tkinter import filedialog
 
 #for audio board button commands
 def play_sound(audio_track,generic_label):      
         #mixer via pygame
         mixer.init()
+        mixer.music.stop()
         audio = mixer.Sound(audio_track)
         mixer.music.load(audio_track)
         mixer.music.play()
@@ -83,6 +85,37 @@ def modify_button(btn_idx,btn_dict, library_text,img_text,sfx_box,img_box,btn_ar
                      btn_dict[btn_idx[0]].set_new_image(images[img_idx])
                      btn_arr[btn_idx[0]].config(image=btn_dict[btn_idx[0]].get_image())
                      #btn_arr[btn_idx[0]].photo1 = btn_dict[btn_idx[0]].get_image()
+
+def add_to_library(type):
+    if(type == "audio"):
+       filename = filedialog.askopenfilename(title="Select sound effect",filetypes=[("Audio",('*.mp3','*.wav','*.ogg','*.xm'))])
+       #audio_types = ["mp3","wav","ogg","xm"]
+       #if filename not in audio_types:
+           #return
+       aud_lib = open("audio_library.txt","a")
+       aud_lib.write('\n' + filename)
+       aud_lib.close()
+       return
+    
+    filename = filedialog.askopenfilename(title="Select image",filetypes=[("Image",('*.jpeg','*.jpg','*.png','*.gif'))])
+    #img_types = ["png","jpeg","jpg","gif"]
+    #if filename not in img_types:
+       #return
+    img_lib = open("img_library.txt","a")
+    img_lib.write('\n' + filename)
+    img_lib.close()
+    return
+
+def save_configuration(btn_dict):
+       output_text =''
+       for idx in range(0,len(btn_dict)):
+              output_text += btn_dict[idx].get_audio_path() + '\n'
+              output_text += btn_dict[idx].get_image_path() + '\n'
+       
+       file = open("custom_buttons.txt",'w')
+       file.write(output_text)
+       file.close()
+
                      
 
        
