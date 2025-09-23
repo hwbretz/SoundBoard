@@ -24,26 +24,26 @@ def main():
     
 
     btn_dict = {0:tracks[0],1:tracks[1],2:tracks[2],3:tracks[3],4:tracks[4],5:tracks[5],6:tracks[6],7:tracks[7],8:tracks[8]}
-    btn_arr = [
-        Button(root,image=btn_dict[0].get_image(),command=lambda:functions.play_sound(btn_dict[0].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[1].get_image(),command=lambda:functions.play_sound(btn_dict[1].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[2].get_image(),command=lambda:functions.play_sound(btn_dict[2].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[3].get_image(),command=lambda:functions.play_sound(btn_dict[3].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[4].get_image(),command=lambda:functions.play_sound(btn_dict[4].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[5].get_image(),command=lambda:functions.play_sound(btn_dict[5].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[6].get_image(),command=lambda:functions.play_sound(btn_dict[6].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[7].get_image(),command=lambda:functions.play_sound(btn_dict[7].get_audio_path(),bottom_lbl)),
-        Button(root,image=btn_dict[8].get_image(),command=lambda:functions.play_sound(btn_dict[8].get_audio_path(),bottom_lbl))
-    ]
-    btn_arr[0].grid(column=0,row=1,sticky=NW)
-    btn_arr[1].grid(column=1,row=1,sticky=N)
-    btn_arr[2].grid(column=2,row=1,sticky=NE)
-    btn_arr[3].grid(column=0,row=2,sticky=W)
-    btn_arr[4].grid(column=1,row=2)
-    btn_arr[5].grid(column=2,row=2,sticky=E)
-    btn_arr[6].grid(column=0,row=3,sticky=W)
-    btn_arr[7].grid(column=1,row=3)
-    btn_arr[8].grid(column=2,row=3,sticky=E)
+    
+    button_0 = Button(root,image=btn_dict[0].get_image(),command=lambda:functions.play_sound(btn_dict[0].get_audio_path(),bottom_lbl))
+    button_0.grid(column=0,row=1,sticky=NW)
+    button_1 = Button(root,image=btn_dict[1].get_image(),command=lambda:functions.play_sound(btn_dict[1].get_audio_path(),bottom_lbl))
+    button_1.grid(column=1,row=1,sticky=N)
+    button_2 = Button(root,image=btn_dict[2].get_image(),command=lambda:functions.play_sound(btn_dict[2].get_audio_path(),bottom_lbl))
+    button_2.grid(column=2,row=1,sticky=NE)
+    button_3 = Button(root,image=btn_dict[3].get_image(),command=lambda:functions.play_sound(btn_dict[3].get_audio_path(),bottom_lbl))
+    button_3.grid(column=0,row=2,sticky=W)
+    button_4 = Button(root,image=btn_dict[4].get_image(),command=lambda:functions.play_sound(btn_dict[4].get_audio_path(),bottom_lbl))
+    button_4.grid(column=1,row=2)
+    button_5 = Button(root,image=btn_dict[5].get_image(),command=lambda:functions.play_sound(btn_dict[5].get_audio_path(),bottom_lbl))
+    button_5.grid(column=2,row=2,sticky=E)
+    button_6 = Button(root,image=btn_dict[6].get_image(),command=lambda:functions.play_sound(btn_dict[6].get_audio_path(),bottom_lbl))
+    button_6.grid(column=0,row=3,sticky=W)
+    button_7 = Button(root,image=btn_dict[7].get_image(),command=lambda:functions.play_sound(btn_dict[7].get_audio_path(),bottom_lbl))
+    button_7.grid(column=1,row=3)
+    button_8 = Button(root,image=btn_dict[8].get_image(),command=lambda:functions.play_sound(btn_dict[8].get_audio_path(),bottom_lbl))
+    button_8.grid(column=2,row=3,sticky=E)
+    
 
     #bottom label
     bottom_lbl = Label(root,text="waiting to play...")
@@ -52,7 +52,7 @@ def main():
     #to hold all the audio tracks available
     #library = functions.build_audio_list("audio_library.txt")
     
-    test_btn = Button(root,text="modify board",command=lambda:modify_board(root,"audio_library.txt",btn_dict,btn_arr))
+    test_btn = Button(root,text="modify board",command=lambda:modify_board(root,"audio_library.txt",btn_dict))
     test_btn.grid(row=4,column=2)
     
     #start up gui
@@ -61,7 +61,7 @@ def main():
 
 
 #2nd window to modify sound board    
-def modify_board(root,library,btn_dict,btn_arr):
+def modify_board(root,library,btn_dict):
     modify_window = Toplevel(root)
     modify_window.title("Modify Sound Board")
     modify_window.geometry("460x300")
@@ -98,15 +98,15 @@ def modify_board(root,library,btn_dict,btn_arr):
     img_box.grid(row=0,column=2)
     functions.populate_listbox_txt(img_box,"img_library.txt")
 
-    modify = Button(modify_window,text="Update selected button",command=lambda:functions.modify_button(btn_box.curselection(),btn_dict,library,"img_library.txt",sfx_box,img_box,btn_arr))
+    modify = Button(modify_window,text="Assign selected audio to selected button",command=lambda:functions.modify_button(btn_box.curselection(),btn_dict,library,"img_library.txt",
+                                                                                                                         sfx_box,img_box))
+                    #tracks,btn_box.get(btn_box.curselection()),sfx_box.get(0,END),sfx_box.get(sfx_box.curselection())
     modify.grid(row=1,column=0)
-
-    
-
     modify_window.protocol("WM_DELETE_WINDOW",lambda: close_window(modify_window))
 
 # close child window
 def close_window(window):
+    
     window.grab_release()
     window.destroy()
 

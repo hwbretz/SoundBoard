@@ -46,20 +46,43 @@ def populate_listbox_obj_arr(listbox,arr):
               listbox.insert(idx,arr[idx])
 
 # reasign button through by button dictionary
-def modify_button(btn_idx,sfx,btn_dict, library_text):
+def modify_button(btn_idx,btn_dict, library_text,img_text,sfx_box,img_box,btn_arr):
        # look for track in audio library
-       library = [line.rstrip() for line in open(library_text)]
-       found = False
-       trk_idx = 0
-       print(f"SFX:{sfx}")
-       while not found and trk_idx < len(library):
-              cur_track =  Path(f'{library[trk_idx]}').stem
-              print(f"CURTRACK:{cur_track}")
-              if cur_track == sfx:
-                     found = True
-              else:       
-                     trk_idx += 1
-       #assign track to button dictionary              
-       if found:
-              btn_dict[btn_idx[0]].set_audio_path(library[trk_idx])
-      
+       
+       if sfx_box.curselection() :
+              sfx = sfx_box.get(sfx_box.curselection())
+              library = [line.rstrip() for line in open(library_text)]
+              found = False
+              trk_idx = 0
+              while not found and trk_idx < len(library):
+                     cur_track =  Path(f'{library[trk_idx]}').stem
+                     if cur_track == sfx:
+                            found = True
+                     else:       
+                            trk_idx += 1
+              #assign track to button dictionary              
+              if found:
+                     btn_dict[btn_idx[0]].set_audio_path(library[trk_idx])
+
+       
+       #update button img
+       if img_box.curselection():
+              img = img_box.get(img_box.curselection())
+              images = [line.rstrip() for line in open(img_text)]
+              found = False
+              img_idx = 0
+              while not found and trk_idx < len(images):
+                     cur_img =  Path(f'{images[img_idx]}').stem
+                     if cur_img == img:
+                            found = True
+                     else:       
+                            img_idx += 1
+              #assign track to button dictionary              
+              if found:
+                     #btn_dict[btn_idx[0]].set_image_path(images[img_idx])
+                     btn_dict[btn_idx[0]].set_new_image(images[img_idx])
+                     btn_arr[btn_idx[0]].config(image=btn_dict[btn_idx[0]].get_image())
+                     #btn_arr[btn_idx[0]].photo1 = btn_dict[btn_idx[0]].get_image()
+                     
+
+       

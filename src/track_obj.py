@@ -24,5 +24,8 @@ class track_object():
         return self.img_path
     def set_image_path(self,new_path):
         self.img_path = os.path.abspath(new_path)
+    def set_new_image(self,new_path):
+        self.set_image_path(new_path)
+        self.icon = self.make_img_icon(new_path)
     def get_image(self):
         return self.icon
