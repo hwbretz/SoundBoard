@@ -8,4 +8,3 @@ img/laughtrack.png
 img/speaker.png
 img/trombone.png
 img/squeak.png
-/home/harrisbretz/workspace/test content/image.png

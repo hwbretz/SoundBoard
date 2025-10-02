@@ -3,9 +3,16 @@ from pathlib import Path
 import os
 from track_obj import track_object
 from tkinter import filedialog
+import pygame._sdl2.audio as sdl2
+
 
 #for audio board button commands
 def play_sound(audio_track,generic_label):      
+        # FOR FUTURE DEV
+        #devices = get_device()
+        #device = devices[0]
+        #mixer.init(devicename=device)
+
         #mixer via pygame
         mixer.init()
         mixer.music.stop()
@@ -31,7 +38,7 @@ def build_audio_list(loadDefault=False):
 
        for idx in range(0,len(tracks),2):
               track_path = os.path.abspath(tracks[idx])
-              if tracks[idx + 1] is not "default":
+              if tracks[idx + 1] != "default":
                      img_path = os.path.abspath(tracks[idx + 1])
               else:
                      img_path = "default"
@@ -126,6 +133,17 @@ def save_configuration(btn_dict):
        file.write(output_text)
        file.close()
 
-                     
-
-       
+# attempting to send audio to line out                     
+def get_device(capture_devices: bool = True)-> tuple[str, ...]:
+       init_by_me = not mixer.get_init()
+       if init_by_me:
+              mixer.init()
+       devices = tuple(sdl2.get_audio_device_names(capture_devices))
+       if init_by_me:
+              mixer.quit()
+       print(devices)
+       line_in = ()
+       for device in devices:
+              if 'Line In' in device:
+                     line_in = device
+       return devices

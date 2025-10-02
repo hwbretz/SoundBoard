@@ -7,4 +7,3 @@ audio/laugh_track.mp3
 audio/squeaky.mp3
 audio/startup.mp3
 audio/burp.mp3
-/home/harrisbretz/workspace/test content/proud-fart-288263.mp3

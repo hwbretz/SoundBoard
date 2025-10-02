@@ -1,5 +1,6 @@
 from tkinter import *
 import functions
+import pyaudio
 
 
 def main():
@@ -21,6 +22,8 @@ def main():
 
     #get audio tracks for buttons
     tracks = functions.build_audio_list()
+
+    #functions.get_device()
     
     #dictionary to hold tracks assigned to buttons
     btn_dict = {0:tracks[0],1:tracks[1],2:tracks[2],3:tracks[3],4:tracks[4],5:tracks[5],6:tracks[6],7:tracks[7],8:tracks[8]}
