@@ -55,6 +55,7 @@ def main():
     menu.add_command(label="Add to audio library",command=lambda:functions.add_to_library("audio"))
     menu.add_command(label="Add to image library",command=lambda:functions.add_to_library("img"))
     menu.add_command(label="Save configuration",command=lambda:functions.save_configuration(btn_dict))
+    menu.add_command(label="Revert to default",command=lambda:functions.load_default(btn_dict,btn_arr,True))
     menubar.add_cascade(label="File",menu=menu)
     root.config(menu = menubar)
 
@@ -62,11 +63,9 @@ def main():
     bottom_lbl = Label(root,text="waiting to play...")
     bottom_lbl.grid(row=4,column=1)
 
-    #to hold all the audio tracks available
-    #library = functions.build_audio_list("audio_library.txt")
-    
-    test_btn = Button(root,text="modify board",command=lambda:modify_board(root,"audio_library.txt",btn_dict,btn_arr))
-    test_btn.grid(row=4,column=2)
+    # button to modify board
+    mod_btn = Button(root,text="modify board",command=lambda:modify_board(root,"audio_library.txt",btn_dict,btn_arr))
+    mod_btn.grid(row=4,column=2)
     
     #start up gui
     root.mainloop()

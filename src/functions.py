@@ -14,27 +14,39 @@ def play_sound(audio_track,generic_label):
         mixer.music.play()
         generic_label.configure(text=("playing " + Path(audio_track).stem))
 
-#read txt file and convert to sfx list
-def build_audio_list(audio_list=None):
-        if audio_list is None:
-            audio_list = "default_audio.txt"
-        
-        #file_dir = os.path.dirname(os.path.realpath('__file__'))
-        
-        tracks= [line.rstrip() for line in open(audio_list)]
-        #with open(list_file,'r') as tracks_file:
-                #tracks = tracks_file.readlines()
-        track_objs = []
+#read txt file and convert to sfx list, loadDefault set to true for reverting back to default
+def build_audio_list(loadDefault=False):
+       
+       # on program open try and use custom configuration, other wise default 
+       if not loadDefault:
+              try:
+                     tracks= [line.rstrip() for line in open("custom_buttons.txt")]
+              except FileNotFoundError:
+                     tracks= [line.rstrip() for line in open("default_audio.txt")]
 
-        for idx in range(0,len(tracks),2):
-               track_path = os.path.abspath(tracks[idx])
-               if tracks[idx + 1] is not "default":
+       else:
+              tracks= [line.rstrip() for line in open("default_audio.txt")]
+
+       track_objs = []
+
+       for idx in range(0,len(tracks),2):
+              track_path = os.path.abspath(tracks[idx])
+              if tracks[idx + 1] is not "default":
                      img_path = os.path.abspath(tracks[idx + 1])
-               else:
+              else:
                      img_path = "default"
-               track_objs.append(track_object(track_path,img_path))
+              track_objs.append(track_object(track_path,img_path))
                #track = os.path.join(file_dir,track)
-        return track_objs
+       return track_objs
+
+def load(btn_dict, btn_arr,loadDefault):
+       tracks = build_audio_list(loadDefault)
+
+       for idx in range(0,len(btn_dict)):
+              btn_dict[idx] = tracks[idx]
+
+       for btn_idx in range(0,len(btn_arr)):
+              btn_arr[btn_idx].config(image=btn_dict[btn_idx].get_image())
 
 #for populating, listboxes
 def populate_listbox_txt(listbox,list_file):
@@ -81,10 +93,8 @@ def modify_button(btn_idx,btn_dict, library_text,img_text,sfx_box,img_box,btn_ar
                             img_idx += 1
               #assign track to button dictionary              
               if found:
-                     #btn_dict[btn_idx[0]].set_image_path(images[img_idx])
                      btn_dict[btn_idx[0]].set_new_image(images[img_idx])
                      btn_arr[btn_idx[0]].config(image=btn_dict[btn_idx[0]].get_image())
-                     #btn_arr[btn_idx[0]].photo1 = btn_dict[btn_idx[0]].get_image()
 
 def add_to_library(type):
     if(type == "audio"):
