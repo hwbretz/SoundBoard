@@ -45,7 +45,7 @@ def build_audio_list(loadDefault=False):
                #track = os.path.join(file_dir,track)
        return track_objs
 
-def load(btn_dict, btn_arr,loadDefault):
+def load_default(btn_dict, btn_arr,loadDefault):
        tracks = build_audio_list(loadDefault)
 
        for idx in range(0,len(btn_dict)):
