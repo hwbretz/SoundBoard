@@ -1,6 +1,6 @@
 audio/sad_trombone.mp3
 img/trombone.png
-audio/boing.mp3
+audio/boing.wav
 img/boing.png
 audio/car_horn.mp3
 img/carhorn.png

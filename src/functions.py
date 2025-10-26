@@ -4,22 +4,21 @@ import os
 from track_obj import track_object
 from tkinter import filedialog
 import pygame._sdl2.audio as sdl2
+#import pyaudio
+import wave
+import soundfile
 
 
 #for audio board button commands
 def play_sound(audio_track,generic_label):      
-        # FOR FUTURE DEV
-        #devices = get_device()
-        #device = devices[0]
-        #mixer.init(devicename=device)
 
-        #mixer via pygame
-        mixer.init()
-        mixer.music.stop()
-        audio = mixer.Sound(audio_track)
-        mixer.music.load(audio_track)
-        mixer.music.play()
-        generic_label.configure(text=("playing " + Path(audio_track).stem))
+       #mixer via pygame
+       mixer.init()
+       mixer.music.stop()
+       audio = mixer.Sound(audio_track)
+       mixer.music.load(audio_track)
+       mixer.music.play()
+       generic_label.configure(text=("playing " + Path(audio_track).stem))
 
 #read txt file and convert to sfx list, loadDefault set to true for reverting back to default
 def build_audio_list(loadDefault=False):

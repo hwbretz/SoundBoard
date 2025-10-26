@@ -1,5 +1,5 @@
 audio/sad_trombone.mp3
-audio/boing.mp3
+audio/boing.wav
 audio/car_horn.mp3
 audio/crickets.mp3
 audio/evil_laugh.mp3
