@@ -1,6 +1,6 @@
 from tkinter import *
 import functions
-import pyaudio
+#import pyaudio
 
 
 def main():
